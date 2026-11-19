@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANIMEX — Anime Library</title>
+<style>
+:root{color-scheme:dark;--bg:#090a0f;--panel:#12141d;--muted:#9ba0b2;--red:#e63946;--line:#252938}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#291018 0,transparent 32%),var(--bg);color:#f7f7fb;font-family:system-ui,"Noto Sans Bengali",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#0b0c12eF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px);padding:15px 5%;display:flex;align-items:center;gap:20px;justify-content:space-between}
+.logo{font-weight:900;font-size:25px;letter-spacing:2px}.logo b{color:var(--red)}nav{display:flex;gap:18px;color:#c6c8d1;font-size:14px}
+button,.btn{border:0;border-radius:10px;padding:11px 16px;background:var(--red);color:white;font-weight:700;cursor:pointer}
+button.secondary{background:#242735;border:1px solid #34394a}main{max-width:1180px;margin:auto;padding:28px 22px}
+.hero{min-height:230px;padding:30px;border:1px solid #48202b;border-radius:20px;background:linear-gradient(110deg,#1c1019,#171923 58%,#32111a);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.hero h1{font-size:clamp(30px,5vw,52px);margin:0 0 8px}.hero p{color:#c0c1cc;margin:0 0 20px}.tag{color:#ff8790;font-size:12px;font-weight:800;letter-spacing:2px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:28px 0 15px;gap:12px}.section-head h2{margin:0;font-size:21px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tools input,.tools select,input,textarea,select{background:#171a25;color:white;border:1px solid #303546;border-radius:9px;padding:11px;font:inherit}
+.tools input{flex:1;min-width:180px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:17px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;cursor:pointer;transition:.2s}.card:hover{transform:translateY(-4px);border-color:#8b3440}
+.poster{height:220px;background:linear-gradient(145deg,#31151e,#171a26);display:flex;align-items:center;justify-content:center;color:#ff8790;font-size:38px;overflow:hidden}.poster img{width:100%;height:100%;object-fit:cover}
+.card-info{padding:12px}.card h3{font-size:15px;margin:0 0 6px}.muted{color:var(--muted);font-size:12px}
+.empty{border:1px dashed #414657;border-radius:14px;padding:35px;text-align:center;color:var(--muted);grid-column:1/-1}
+dialog{background:#11141e;color:white;border:1px solid #34394a;border-radius:16px;width:min(560px,calc(100% - 25px));padding:22px}
+dialog::backdrop{background:#000b;backdrop-filter:blur(4px)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#c6c8d1}.field.full{grid-column:1/-1}.field input,.field select{width:100%}.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+#player{width:min(900px,calc(100% - 20px));}.player-video{width:100%;max-height:65vh;background:#000;border-radius:10px}
+.notice{font-size:12px;color:#ffc5ca;background:#2a151b;border:1px solid #63303a;padding:12px;border-radius:10px;margin-top:18px}
+footer{padding:30px 20px;text-align:center;color:#777d8e;border-top:1px solid var(--line);margin-top:35px}
+@media(max-width:650px){nav{display:none}.hero{padding:22px}.hero .hero-art{display:none}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.poster{height:195px}}
+</style></head>
+<body>
+<header><div class="logo">ANI<b>MEX</b></div><nav><span>হোম</span><span>অ্যানিমে লাইব্রেরি</span><span>আমার তালিকা</span></nav><button id="openAdd">＋ অ্যানিমে যোগ</button></header>
+<main>
+<section class="hero"><div><div class="tag">তোমার অ্যানিমে দুনিয়া</div><h1>দেখো। খুঁজে নাও।<br><span style="color:#ff6875">নতুন গল্প আবিষ্কার করো।</span></h1><p>সব ভাষার অ্যানিমে এক জায়গায় সাজিয়ে রাখো।</p><button onclick="document.querySelector('#library').scrollIntoView({behavior:'smooth'})">লাইব্রেরি দেখো ↓</button></div><div class="hero-art" style="font-size:90px;opacity:.8">影</div></section>
+<div class="section-head" id="library"><h2>অ্যানিমে লাইব্রেরি</h2><span class="muted" id="count">০টি অ্যানিমে</span></div>
+<div class="tools"><input id="search" placeholder="অ্যানিমের নাম দিয়ে খুঁজুন…"><select id="langFilter"><option value="">সব ভাষা</option><option>বাংলা</option><option>হিন্দি</option><option>জাপানি</option><option>ইংরেজি</option><option>অন্যান্য</option></select></div>
+<div class="grid" id="grid"><div class="empty">লাইব্রেরি এখন খালি। “＋ অ্যানিমে যোগ” চাপ দিয়ে নিজের অনুমতিপ্রাপ্ত ভিডিও যোগ করো।</div></div>
+<div class="notice">এই প্রাথমিক সংস্করণে ভিডিও ও তথ্য শুধু এই ব্রাউজার/ডিভাইসের IndexedDB-তে থাকে। অন্যরা অনলাইনে দেখতে পারবে না। সবার জন্য প্রকাশ করতে পরে নিরাপদ সার্ভার ও স্টোরেজ যুক্ত করতে হবে। কেবল নিজের তৈরি বা আপলোডের অনুমতি আছে এমন ভিডিও যোগ করো।</div>
+</main><footer>© ANIMEX · অ্যানিমে ভালোবাসার নিজস্ব লাইব্রেরি</footer>
+<dialog id="addDialog"><form id="animeForm"><h2 style="margin-top:0">নতুন অ্যানিমে যোগ করো</h2><div class="form-grid">
+<label class="field full">অ্যানিমের নাম *<input name="title" required maxlength="100" placeholder="যেমন: My Anime"></label>
+<label class="field">ভাষা<select name="language"><option>জাপানি</option><option>বাংলা</option><option>হিন্দি</option><option>ইংরেজি</option><option>অন্যান্য</option></select></label>
+<label class="field">ধরন<input name="genre" placeholder="অ্যাকশন, ফ্যান্টাসি…"></label>
+<label class="field full">পোস্টার ছবির লিংক (ঐচ্ছিক)<input name="poster" type="url" placeholder="https://…"></label>
+<label class="field full">ভিডিও ফাইল *<input name="video" type="file" accept="video/*" required></label>
+</div><p class="muted">বড় ভিডিও ফাইলের জন্য অনলাইন সার্ভার ব্যবহার করতে হবে।</p><div class="actions"><button type="button" class="secondary" id="cancelAdd">বাতিল</button><button type="submit">লাইব্রেরিতে যোগ করো</button></div></form></dialog>
+<dialog id="player"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2 id="playerTitle">অ্যানিমে</h2><button class="secondary" id="closePlayer">বন্ধ</button></div><video class="player-video" id="video" controls playsinline></video><p id="playerMeta" class="muted"></p></dialog>
+<script>
+const DB='animex-local-db', STORE='anime';let db,items=[],currentUrl=null;
+function openDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>r.result.createObjectStore(STORE,{keyPath:'id'});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+function request(req){return new Promise((resolve,reject)=>{req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+async function load(){items=await request(db.transaction(STORE).objectStore(STORE).getAll());render()}
+function render(){const q=document.querySelector('#search').value.toLowerCase(),lang=document.querySelector('#langFilter').value;const shown=items.filter(x=>x.title.toLowerCase().includes(q)&&(!lang||x.language===lang));document.querySelector('#count').textContent=items.length+'টি অ্যানিমে';const grid=document.querySelector('#grid');grid.innerHTML='';if(!shown.length){grid.innerHTML='<div class="empty">কোনো অ্যানিমে পাওয়া যায়নি। নতুন অ্যানিমে যোগ করে দেখো।</div>';return}shown.forEach(x=>{const c=document.createElement('article');c.className='card';const p=document.createElement('div');p.className='poster';if(x.poster){const img=document.createElement('img');img.src=x.poster;img.alt=x.title;p.append(img)}else p.textContent='▶';const info=document.createElement('div');info.className='card-info';const h=document.createElement('h3');h.textContent=x.title;const m=document.createElement('div');m.className='muted';m.textContent=x.language+' · '+(x.genre||'অ্যানিমে');info.append(h,m);c.append(p,info);c.onclick=()=>play(x);grid.append(c)})}
+function play(x){if(currentUrl)URL.revokeObjectURL(currentUrl);currentUrl=URL.createObjectURL(x.video);document.querySelector('#playerTitle').textContent=x.title;document.querySelector('#playerMeta').textContent=x.language+' · '+(x.genre||'অ্যানিমে');const v=document.querySelector('#video');v.src=currentUrl;document.querySelector('#player').showModal();v.play().catch(()=>{})}
+document.querySelector('#openAdd').onclick=()=>document.querySelector('#addDialog').showModal();
+document.querySelector('#cancelAdd').onclick=()=>document.querySelector('#addDialog').close();
+document.querySelector('#closePlayer').onclick=()=>{document.querySelector('#video').pause();document.querySelector('#video').removeAttribute('src');document.querySelector('#player').close();if(currentUrl)URL.revokeObjectURL(currentUrl);currentUrl=null};
+document.querySelector('#search').oninput=render;document.querySelector('#langFilter').onchange=render;
+document.querySelector('#animeForm').onsubmit=async e=>{e.preventDefault();const f=e.currentTarget,video=f.video.files[0];if(!video)return;const item={id:crypto.randomUUID(),title:f.title.value.trim(),language:f.language.value,genre:f.genre.value.trim(),poster:f.poster.value.trim(),video};try{await request(db.transaction(STORE,'readwrite').objectStore(STORE).add(item));f.reset();document.querySelector('#addDialog').close();await load()}catch(err){alert('ভিডিও সংরক্ষণ করা যায়নি। ফাইলটি ছোট করে আবার চেষ্টা করো।')}};
+(async()=>{try{db=await openDB();await load()}catch(e){document.querySelector('#grid').innerHTML='<div class="empty">এই ব্রাউজারে স্থানীয় সংরক্ষণ চালু করা যাচ্ছে না।</div>'}})();
+</script></body></html>
